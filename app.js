@@ -84,8 +84,8 @@ const products = [
   const currentProductImg = document.querySelector(".productImg");
   const currentProductTitle = document.querySelector(".productTitle");
   const currentProductPrice = document.querySelector(".productPrice");
-  const currentProductColors = document.querySelectorAll(".colors");
-  const currentProductSizes = document.querySelectorAll(".sizes");
+  const currentProductColors = document.querySelectorAll(".color");
+  const currentProductSizes = document.querySelectorAll(".size");
 
 menuItems.forEach((item, index) => {
     item.addEventListener("click", () => {
@@ -100,10 +100,42 @@ menuItems.forEach((item, index) => {
     currentProductPrice.textContent = `£${chosenProduct.price}`;
     currentProductImg.src = chosenProduct.colors[0].img;
 
+    //Assign new colours
     currentProductColors.forEach((color, index) => {
-        color.style.backgroundColor = chosenProduct.colors[index].code;
+      color.style.backgroundColor = chosenProduct.colors[index].code;
     });
 
 
     });
+});
+
+//Changes the image when a new colour is selected
+currentProductColors.forEach((color, index) => {
+    color.addEventListener("click", () => {
+        currentProductImg.src = chosenProduct.colors[index].img;
+    });
+});
+
+//Changes the size when a new size is selected
+currentProductSizes.forEach((size, index) => {
+  size.addEventListener("click", () => {
+    currentProductSizes.forEach((size) => {
+      size.style.backgroundColor = "white";
+      size.style.color = "black";
+    });
+    size.style.backgroundColor = "black";
+    size.style.color = "white";
+  });
+});
+
+const productButton = document.querySelector(".productButton");
+const payment = document.querySelector(".payment");
+const close = document.querySelector(".close");
+
+productButton.addEventListener("click", () => {
+  payment.style.display = "flex";
+});
+
+close.addEventListener("click", () => {
+  payment.style.display = "none";
 });
